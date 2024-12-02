@@ -44,13 +44,25 @@ class CommentArea extends Component {
   render() {
     console.log("lista commenti render: ", this.state.lista_commenti);
     return (
-      <div>
-        <h3>Commenti</h3>
-        {this.state.lista_commenti.length > 0 && (
-          <CommentList listaCommenti={this.state.lista_commenti} />
+      <>
+        {this.props.idLibro && (
+          <div>
+            <h3>Commenti</h3>
+            {this.state.lista_commenti.length > 0 && (
+              <CommentList listaCommenti={this.state.lista_commenti} />
+            )}
+            <AddComment idLibro={this.props.idLibro} />
+          </div>
         )}
-        <AddComment idLibro={this.props.idLibro} />
-      </div>
+        {!this.props.idLibro && (
+          <div>
+            <h3>
+              seleziona un libro <br />
+              per visualizzare i commenti
+            </h3>
+          </div>
+        )}
+      </>
     );
   }
 }
