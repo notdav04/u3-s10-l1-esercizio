@@ -8,6 +8,7 @@ class CommentArea extends Component {
     lista_commenti: []
   };
   fetchCommenti = async () => {
+    console.log("fetch avviata dopo cambiamento props");
     const url =
       "https://striveschool-api.herokuapp.com/api/comments/" +
       this.props.idLibro;
@@ -33,12 +34,15 @@ class CommentArea extends Component {
     // this.fetchCommenti();
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.idLibro !== this.props.idLibro) {
+    if (prevProps.idLibro != this.props.idLibro) {
       console.log("id:", this.props.idLibro);
-      this.fetchCommenti();
+      this.setState({ lista_commenti: [] }, () => {
+        this.fetchCommenti();
+      });
     }
   }
   render() {
+    console.log("lista commenti render: ", this.state.lista_commenti);
     return (
       <div>
         <h3>Commenti</h3>
